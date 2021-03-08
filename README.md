@@ -22,8 +22,8 @@ Una vez se resuelve el turno se comprueba si el jugador o el enemigo han muerto:
 **Objetivos:**
 1. Crear los siguientes sistemas e implementar el patrón command:
 * Sistema de gestión del juego.
-* Sistema de gestión del comportamiento del personaje principal o jugador.
-* Sistema de gestión del comportamiento de cada enemigo.
+* Sistema de gestión del comportamiento del personaje principal o jugador (opcional).
+* Sistema de gestión del comportamiento de cada enemigo (opcional).
 2. Estructurar y comentar el código correctamente.
 3. Compilar el proyecto de Unity para Windows.
 
