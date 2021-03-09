@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerActionController : MonoBehaviour, IActionController, ICurrentAction
+public class PlayerActionController : MonoBehaviour, IActionController, ICurrentAction, IObserver
 {
     // Get current action action points cost or 0 if it is the default action.
     public int CurrentActionActionPoints => currentAction ? currentAction.ActionPoints : 0;
@@ -14,6 +14,7 @@ public class PlayerActionController : MonoBehaviour, IActionController, ICurrent
     private int index = 0;
     private Button button;
     private ISubject<ActionPointsArgs> actionPointsController;
+    private ISubject playerTurnEnder;
 
     private void Awake()
     {
@@ -24,6 +25,23 @@ public class PlayerActionController : MonoBehaviour, IActionController, ICurrent
         actions = GetComponents<ActionBase>();
 
         actionPointsController = GetComponentInParent<ISubject<ActionPointsArgs>>();
+
+        playerTurnEnder = FindObjectOfType<ButtonEndController>();
+    }
+
+    private void OnEnable()
+    {
+        playerTurnEnder.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        playerTurnEnder.Remove(this);
+    }
+
+    public void OnNotify()
+    {
+        ResetAction();
     }
 
     public void ChangeAction()

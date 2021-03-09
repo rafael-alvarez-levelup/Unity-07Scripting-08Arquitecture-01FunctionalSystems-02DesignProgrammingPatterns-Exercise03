@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour, ISubject<LevelArgs>
+public class LevelManager : MonoBehaviour, ISubject<LevelArgs>, IIncrementLevel
 {
-    private int currentLevel = 1;
+    private int currentLevel;
 
     private readonly List<IObserver<LevelArgs>> observers = new List<IObserver<LevelArgs>>();
 

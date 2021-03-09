@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 216462053}
   - component: {fileID: 216462052}
   - component: {fileID: 216462051}
+  - component: {fileID: 216462054}
   m_Layer: 5
   m_Name: ButtonEnd
   m_TagString: Untagged
@@ -439,6 +440,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216462049}
   m_CullTransparentMesh: 0
+--- !u!114 &216462054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216462049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fdb877ec9892045a6bd759eb1f5ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &225865931
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +914,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367426194}
   m_CullTransparentMesh: 0
+--- !u!1 &439510663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 439510664}
+  - component: {fileID: 439510665}
+  m_Layer: 0
+  m_Name: Game State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &439510664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439510663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &439510665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439510663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf8d3152c74d5147a2fe1b0e9c284b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 339237100}
+  buttonEndController: {fileID: 216462054}
+  playerButtons:
+  - {fileID: 996514218}
+  - {fileID: 315443776}
+  - {fileID: 1687736312}
+  - {fileID: 216462051}
+  enemySlots:
+  - {fileID: 1098209712}
+  - {fileID: 1504767332}
+  - {fileID: 609659986}
 --- !u!1 &559803870
 GameObject:
   m_ObjectHideFlags: 0

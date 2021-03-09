@@ -8,14 +8,14 @@ public class StateController : MonoBehaviour, IStateController
 
     protected IState currentState;
 
-    private void Update()
-    {
-        currentState.Update();
-    }
+    //private void Update()
+    //{
+    //    currentState.Update();
+    //}
 
     public void SwitchState<T>() where T : IState
     {
-        currentState?.Exit();
+        currentState?.Exit(); // The first state is going to be null
         IState nextState = states[typeof(T)];
         currentState = nextState;
         currentState.Enter();
