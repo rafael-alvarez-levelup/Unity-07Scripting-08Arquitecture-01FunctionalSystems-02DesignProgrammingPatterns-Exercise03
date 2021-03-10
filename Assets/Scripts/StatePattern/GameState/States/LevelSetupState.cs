@@ -19,6 +19,7 @@ public class LevelSetupState : State
         levelIncrementer.IncrementLevel();
 
         // Instantiate new enemy
+        UnityEngine.Debug.Log("Instantiate new enemy");
 
         controller.SwitchState<PlayerTurnState>();
     }

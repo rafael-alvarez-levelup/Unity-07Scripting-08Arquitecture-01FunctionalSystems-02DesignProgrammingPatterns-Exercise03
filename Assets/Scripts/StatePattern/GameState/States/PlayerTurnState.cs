@@ -25,7 +25,7 @@ public class PlayerTurnState : State, IObserver
 
     public override void Exit()
     {
-        // Change the iterator in the observers list while it is still iterating => use for loop
+        // This change the iterator in the observers list while it is still iterating => use for loop
         playerTurnEnder.Remove(this);
 
         foreach (var button in playerButtons)

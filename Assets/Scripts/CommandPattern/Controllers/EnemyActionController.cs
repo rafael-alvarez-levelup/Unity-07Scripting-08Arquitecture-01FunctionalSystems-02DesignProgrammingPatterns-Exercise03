@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// TODO: Reset actions here or in TurnResultionState
+
 public class EnemyActionController : MonoBehaviour, IActionController
 {
     [SerializeField] private Sprite defaultIcon;

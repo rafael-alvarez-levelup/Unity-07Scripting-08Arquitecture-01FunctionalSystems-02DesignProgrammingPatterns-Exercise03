@@ -2,11 +2,11 @@
 
 public class EnemyTurnState : State
 {
-    private readonly IActionController[] controllers;
+    private readonly IActionController[] actionControllers;
 
-    public EnemyTurnState(IStateController controller, IActionController[] controllers) : base(controller)
+    public EnemyTurnState(IStateController controller, IActionController[] actionControllers) : base(controller)
     {
-        this.controllers = controllers;
+        this.actionControllers = actionControllers;
     }
 
     public override void Enter()
@@ -29,12 +29,12 @@ public class EnemyTurnState : State
 
     private void RandomizeActions()
     {
-        foreach (var controller in controllers)
+        foreach (var controller in actionControllers)
         {
             controller.ResetAction();
         }
 
-        foreach (var controller in controllers)
+        foreach (var controller in actionControllers)
         {
             ICommand command = controller.GetCurrentCommand();
 

@@ -19,10 +19,14 @@
 
         if (randomNumber == 0)
         {
+            UnityEngine.Debug.Log("Enemy is still alive. Player turn");
+
             controller.SwitchState<PlayerTurnState>();
         }
         else
         {
+            UnityEngine.Debug.Log("Enemy dead. Next level");
+
             controller.SwitchState<LevelSetupState>();
         }
     }
