@@ -15,6 +15,7 @@ public class PlayerTurnState : State, IObserver
     {
         playerTurnEnder.Add(this);
 
+        // TODO: Abstract with interfaces
         foreach (var button in playerButtons)
         {
             button.interactable = true;
