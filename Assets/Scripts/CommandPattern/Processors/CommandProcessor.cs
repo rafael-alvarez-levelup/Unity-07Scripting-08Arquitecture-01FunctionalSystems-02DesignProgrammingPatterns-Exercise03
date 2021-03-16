@@ -10,6 +10,11 @@ public class CommandProcessor : MonoBehaviour, ICommandProcessor
         commands.Enqueue(command);
     }
 
+    public int GetCommandQueueCount()
+    {
+        return commands.Count;
+    }
+
     public void RunNext()
     {
         if (commands.Count > 0)

@@ -2,4 +2,5 @@
 {
     void Add(ICommand command);
     void RunNext();
+    int GetCommandQueueCount();
 }

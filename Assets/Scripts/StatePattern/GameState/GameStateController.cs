@@ -4,9 +4,13 @@ using UnityEngine.UI;
 public class GameStateController : StateController
 {
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private ActionSelectorController playerActionSelector;
     [SerializeField] private ButtonEndController buttonEndController;
     [SerializeField] private Button[] playerButtons;
-    [SerializeField] private EnemyActionController[] enemySlots;
+    [SerializeField] private ActionSelectorController enemyActionSelector;
+    [SerializeField] private CommandProcessor playerProcessor;
+    [SerializeField] private CommandProcessor enemyProcessor;
+    [SerializeField] private HealthController enemyHealth;
 
     private IState levelSetupState;
     private IState playerTurnState;
@@ -17,10 +21,11 @@ public class GameStateController : StateController
     private void Awake()
     {
         levelSetupState = new LevelSetupState(this, levelManager);
-        playerTurnState = new PlayerTurnState(this, buttonEndController, playerButtons);
-        enemyTurnState = new EnemyTurnState(this, enemySlots);
-        turnResolutionState = new TurnResolutionState(this);
-        levelEndState = new LevelEndState(this);
+        playerTurnState = new PlayerTurnState(this, playerActionSelector, buttonEndController, playerButtons);
+        enemyTurnState = new EnemyTurnState(this, enemyActionSelector);
+        turnResolutionState = new TurnResolutionState(this, playerProcessor, enemyProcessor,
+            playerActionSelector, enemyActionSelector);
+        levelEndState = new LevelEndState(this, enemyHealth);
 
         states.Add(typeof(LevelSetupState), levelSetupState);
         states.Add(typeof(PlayerTurnState), playerTurnState);

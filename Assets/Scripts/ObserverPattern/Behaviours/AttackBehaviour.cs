@@ -1,34 +1,24 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 // TODO: Serialize Animator and SetTrigger("Attack")
 
-public class AttackBehaviour : MonoBehaviour, IAttack, ISubject<AttackArgs>
+public class AttackBehaviour : Subject<AttackArgs>, IAttack
 {
     [SerializeField] private int damage;
-
-    private readonly List<IObserver<AttackArgs>> observers = new List<IObserver<AttackArgs>>();
 
     public void Attack()
     {
         Notify();
     }
 
-    public void Add(IObserver<AttackArgs> observer)
+    public override void Notify()
     {
-        observers.Add(observer);
-    }
+        // It won't change, cache
+        AttackArgs attackArgs = new AttackArgs(damage);
 
-    public void Remove(IObserver<AttackArgs> observer)
-    {
-        observers.Remove(observer);
-    }
-
-    public void Notify()
-    {
         foreach (var observer in observers)
         {
-            observer.OnNotify(new AttackArgs(damage));
+            observer.OnNotify(attackArgs);
         }
     }
 }

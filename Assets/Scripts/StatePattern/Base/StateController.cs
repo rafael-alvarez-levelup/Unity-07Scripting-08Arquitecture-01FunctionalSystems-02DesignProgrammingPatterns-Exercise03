@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateController : MonoBehaviour, IStateController
+public abstract class StateController : MonoBehaviour, IStateController
 {
     protected readonly Dictionary<Type, IState> states = new Dictionary<Type, IState>();
 
     protected IState currentState;
-
-    //private void Update()
-    //{
-    //    currentState.Update();
-    //}
 
     public void SwitchState<T>() where T : IState
     {

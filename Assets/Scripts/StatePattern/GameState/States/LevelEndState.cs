@@ -1,34 +1,29 @@
 ﻿public class LevelEndState : State
 {
-    public LevelEndState(GameStateController controller) : base(controller)
-    {
+    private readonly IHealth enemyHealth;
 
+    public LevelEndState(GameStateController controller, IHealth enemyHealth) : base(controller)
+    {
+        this.enemyHealth = enemyHealth;
     }
 
     public override void Enter()
     {
+        UnityEngine.Debug.Log($"Enter {typeof(LevelEndState)}");
+
         // If enemy is alive (!null), switch to player turn state
         // Else, switch to level setup state
 
-        // Handle player death
-
-        UnityEngine.Debug.Log($"Enter {typeof(LevelEndState)}");
-
-        // TODO: Remove this test
-        int randomNumber = UnityEngine.Random.Range(0, 2);
-
-        if (randomNumber == 0)
+        if (enemyHealth.GetCurrentHealth() <= 0)
         {
-            UnityEngine.Debug.Log("Enemy is still alive. Player turn");
-
-            controller.SwitchState<PlayerTurnState>();
+            controller.SwitchState<LevelSetupState>();
         }
         else
         {
-            UnityEngine.Debug.Log("Enemy dead. Next level");
-
-            controller.SwitchState<LevelSetupState>();
+            controller.SwitchState<PlayerTurnState>();
         }
+
+        // Handle player death
     }
 
     public override void Exit()

@@ -2,11 +2,11 @@
 
 public class EnemyTurnState : State
 {
-    private readonly IActionController[] actionControllers;
+    private readonly IActionSelector actionSelector;
 
-    public EnemyTurnState(IStateController controller, IActionController[] actionControllers) : base(controller)
+    public EnemyTurnState(IStateController controller, IActionSelector actionSelector) : base(controller)
     {
-        this.actionControllers = actionControllers;
+        this.actionSelector = actionSelector;
     }
 
     public override void Enter()
@@ -15,9 +15,9 @@ public class EnemyTurnState : State
         // Needs a monobehaviour for the coroutine
         // When finished, switch to turn resolution state
 
-        Debug.Log($"Enter {typeof(EnemyTurnState)}");
+        actionSelector.SelectActions();
 
-        RandomizeActions();
+        Debug.Log($"Enter {typeof(EnemyTurnState)}");
 
         controller.SwitchState<TurnResolutionState>();
     }
@@ -25,20 +25,5 @@ public class EnemyTurnState : State
     public override void Exit()
     {
         Debug.Log($"Exit {typeof(EnemyTurnState)}");
-    }
-
-    private void RandomizeActions()
-    {
-        foreach (var controller in actionControllers)
-        {
-            controller.ResetAction();
-        }
-
-        foreach (var controller in actionControllers)
-        {
-            ICommand command = controller.GetCurrentCommand();
-
-            Debug.Log($"Enemy command selected: {command.GetType()}");
-        }
     }
 }

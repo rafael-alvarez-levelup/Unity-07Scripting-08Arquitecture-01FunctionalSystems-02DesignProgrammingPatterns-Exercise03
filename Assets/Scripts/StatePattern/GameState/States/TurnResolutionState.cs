@@ -1,11 +1,20 @@
-﻿// TODO: Reset the actions here, now the player actions are being reset in PlayerActionController
-// Do an action and reset it?
+﻿// TODO: Do an action and reset it?
 
 public class TurnResolutionState : State
 {
-    public TurnResolutionState(IStateController controller) : base(controller)
-    {
+    private readonly ICommandProcessor playerProcessor;
+    private readonly ICommandProcessor enemyProcessor;
+    private readonly IActionSelector playerSelector;
+    private readonly IActionSelector enemySelector;
 
+    public TurnResolutionState(IStateController controller, ICommandProcessor playerProcessor,
+        ICommandProcessor enemyProcessor, IActionSelector playerSelector,
+        IActionSelector enemySelector) : base(controller)
+    {
+        this.playerProcessor = playerProcessor;
+        this.enemyProcessor = enemyProcessor;
+        this.playerSelector = playerSelector;
+        this.enemySelector = enemySelector;
     }
 
     public override void Enter()
@@ -15,13 +24,20 @@ public class TurnResolutionState : State
 
         UnityEngine.Debug.Log($"Enter {typeof(TurnResolutionState)}");
 
-        UnityEngine.Debug.Log($"Processing commands...");
+        while (playerProcessor.GetCommandQueueCount() != 0 || enemyProcessor.GetCommandQueueCount() != 0)
+        {
+            enemyProcessor.RunNext();
+            playerProcessor.RunNext();
+        }
 
         controller.SwitchState<LevelEndState>();
     }
 
     public override void Exit()
     {
+        enemySelector.ResetActions();
+        playerSelector.ResetActions();
+
         UnityEngine.Debug.Log($"Exit {typeof(TurnResolutionState)}");
     }
 }

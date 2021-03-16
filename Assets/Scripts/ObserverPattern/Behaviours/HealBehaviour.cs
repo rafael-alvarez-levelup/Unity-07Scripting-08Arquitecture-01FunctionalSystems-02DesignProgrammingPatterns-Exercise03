@@ -1,32 +1,21 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HealBehaviour : MonoBehaviour, IHeal, ISubject<HealArgs>
+public class HealBehaviour : Subject<HealArgs>, IHeal
 {
     [SerializeField] private int healing;
-
-    private readonly List<IObserver<HealArgs>> observers = new List<IObserver<HealArgs>>();
 
     public void Heal()
     {
         Notify();
     }
 
-    public void Add(IObserver<HealArgs> observer)
+    public override void Notify()
     {
-        observers.Add(observer);
-    }
+        HealArgs healArgs = new HealArgs(healing);
 
-    public void Remove(IObserver<HealArgs> observer)
-    {
-        observers.Remove(observer);
-    }
-
-    public void Notify()
-    {
         foreach (var observer in observers)
         {
-            observer.OnNotify(new HealArgs(healing));
+            observer.OnNotify(healArgs);
         }
     }
 }

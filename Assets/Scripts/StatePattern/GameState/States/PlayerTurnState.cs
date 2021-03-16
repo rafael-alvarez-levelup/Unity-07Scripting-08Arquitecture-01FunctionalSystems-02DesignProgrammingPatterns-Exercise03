@@ -2,11 +2,14 @@
 
 public class PlayerTurnState : State, IObserver
 {
+    private readonly IActionSelector actionSelector;
     private readonly ISubject playerTurnEnder;
     private readonly Button[] playerButtons;
 
-    public PlayerTurnState(IStateController controller, ISubject playerTurnEnder, Button[] playerButtons) : base(controller)
+    public PlayerTurnState(IStateController controller, IActionSelector actionSelector,
+        ISubject playerTurnEnder, Button[] playerButtons) : base(controller)
     {
+        this.actionSelector = actionSelector;
         this.playerTurnEnder = playerTurnEnder;
         this.playerButtons = playerButtons;
     }
@@ -39,6 +42,8 @@ public class PlayerTurnState : State, IObserver
 
     public void OnNotify()
     {
+        actionSelector.SelectActions();
+
         controller.SwitchState<EnemyTurnState>();
     }
 }

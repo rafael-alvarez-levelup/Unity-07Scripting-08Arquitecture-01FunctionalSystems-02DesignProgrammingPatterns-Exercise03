@@ -4,7 +4,7 @@ public class LevelSetupState : State
 {
     private readonly IIncrementLevel levelIncrementer;
 
-    public LevelSetupState(GameStateController controller, IIncrementLevel levelIncrementer) : base(controller)
+    public LevelSetupState(IStateController controller, IIncrementLevel levelIncrementer) : base(controller)
     {
         this.levelIncrementer = levelIncrementer;
     }

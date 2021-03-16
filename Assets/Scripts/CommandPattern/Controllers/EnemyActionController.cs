@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// TODO: Reset actions here or in TurnResultionState
+// TODO: Reset actions here or in TurnResolutionState
 
 public class EnemyActionController : MonoBehaviour, IActionController
 {
