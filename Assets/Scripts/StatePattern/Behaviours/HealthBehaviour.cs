@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-public class HealthController : MonoBehaviour, IHealth
+//TOOD: Implement heal and take damage
+
+public class HealthBehaviour : MonoBehaviour, IHealth
 {
     [SerializeField] private int maxHealth;
 
@@ -14,5 +16,15 @@ public class HealthController : MonoBehaviour, IHealth
     public int GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public void Heal(int amount)
+    {
+
+    }
+
+    public void TakeDamage(int amount)
+    {
+
     }
 }

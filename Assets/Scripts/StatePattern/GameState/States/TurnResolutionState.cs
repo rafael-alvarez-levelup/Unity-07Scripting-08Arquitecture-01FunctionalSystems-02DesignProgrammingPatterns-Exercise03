@@ -1,20 +1,21 @@
 ﻿// TODO: Do an action and reset it?
+// Break in two (player and enemy)
 
 public class TurnResolutionState : State
 {
     private readonly ICommandProcessor playerProcessor;
     private readonly ICommandProcessor enemyProcessor;
-    private readonly IActionSelector playerSelector;
-    private readonly IActionSelector enemySelector;
+    private readonly IResetActions playerReset;
+    private readonly IResetActions enemyReset;
 
     public TurnResolutionState(IStateController controller, ICommandProcessor playerProcessor,
-        ICommandProcessor enemyProcessor, IActionSelector playerSelector,
-        IActionSelector enemySelector) : base(controller)
+        ICommandProcessor enemyProcessor, IResetActions playerSelector,
+        IResetActions enemySelector) : base(controller)
     {
         this.playerProcessor = playerProcessor;
         this.enemyProcessor = enemyProcessor;
-        this.playerSelector = playerSelector;
-        this.enemySelector = enemySelector;
+        this.playerReset = playerSelector;
+        this.enemyReset = enemySelector;
     }
 
     public override void Enter()
@@ -35,8 +36,8 @@ public class TurnResolutionState : State
 
     public override void Exit()
     {
-        enemySelector.ResetActions();
-        playerSelector.ResetActions();
+        enemyReset.ResetActions();
+        playerReset.ResetActions();
 
         UnityEngine.Debug.Log($"Exit {typeof(TurnResolutionState)}");
     }

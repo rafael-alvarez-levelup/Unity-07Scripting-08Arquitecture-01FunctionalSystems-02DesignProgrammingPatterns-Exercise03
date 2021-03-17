@@ -2,12 +2,12 @@
 
 public class PlayerTurnState : State, IObserver
 {
-    private readonly IActionSelector actionSelector;
+    private readonly ISelectActions actionSelector;
     private readonly ISubject playerTurnEnder;
-    private readonly Button[] playerButtons;
+    private readonly ISetInteractable[] playerButtons;
 
-    public PlayerTurnState(IStateController controller, IActionSelector actionSelector,
-        ISubject playerTurnEnder, Button[] playerButtons) : base(controller)
+    public PlayerTurnState(IStateController controller, ISelectActions actionSelector,
+        ISubject playerTurnEnder, ISetInteractable[] playerButtons) : base(controller)
     {
         this.actionSelector = actionSelector;
         this.playerTurnEnder = playerTurnEnder;
@@ -16,15 +16,14 @@ public class PlayerTurnState : State, IObserver
 
     public override void Enter()
     {
+        UnityEngine.Debug.Log($"Enter {typeof(PlayerTurnState)}");
+
         playerTurnEnder.Add(this);
 
-        // TODO: Abstract with interfaces
         foreach (var button in playerButtons)
         {
-            button.interactable = true;
+            button.SetInteractable(true);
         }
-
-        UnityEngine.Debug.Log($"Enter {typeof(PlayerTurnState)}");
     }
 
     public override void Exit()
@@ -34,7 +33,7 @@ public class PlayerTurnState : State, IObserver
 
         foreach (var button in playerButtons)
         {
-            button.interactable = false;
+            button.SetInteractable(false);
         }
 
         UnityEngine.Debug.Log($"Exit {typeof(PlayerTurnState)}");

@@ -2,9 +2,9 @@
 
 public class EnemyTurnState : State
 {
-    private readonly IActionSelector actionSelector;
+    private readonly ISelectActions actionSelector;
 
-    public EnemyTurnState(IStateController controller, IActionSelector actionSelector) : base(controller)
+    public EnemyTurnState(IStateController controller, ISelectActions actionSelector) : base(controller)
     {
         this.actionSelector = actionSelector;
     }
@@ -15,9 +15,9 @@ public class EnemyTurnState : State
         // Needs a monobehaviour for the coroutine
         // When finished, switch to turn resolution state
 
-        actionSelector.SelectActions();
-
         Debug.Log($"Enter {typeof(EnemyTurnState)}");
+
+        actionSelector.SelectActions();
 
         controller.SwitchState<TurnResolutionState>();
     }

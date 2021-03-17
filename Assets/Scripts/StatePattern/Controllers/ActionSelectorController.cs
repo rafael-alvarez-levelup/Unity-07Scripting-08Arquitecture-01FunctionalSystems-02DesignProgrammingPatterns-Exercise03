@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class ActionSelectorController : MonoBehaviour, IActionSelector
+public class ActionSelectorController : MonoBehaviour, ISelectActions, IResetActions
 {
     private IActionController[] myActionControllers;
     private ICommandProcessor myCommandProcessor;

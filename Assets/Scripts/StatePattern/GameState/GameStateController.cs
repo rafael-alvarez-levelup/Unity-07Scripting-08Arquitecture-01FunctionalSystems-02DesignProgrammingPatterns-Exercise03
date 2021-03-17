@@ -6,11 +6,11 @@ public class GameStateController : StateController
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private ActionSelectorController playerActionSelector;
     [SerializeField] private ButtonEndController buttonEndController;
-    [SerializeField] private Button[] playerButtons;
+    [SerializeField] private PlayerButtonBehaviour[] playerButtons;
     [SerializeField] private ActionSelectorController enemyActionSelector;
     [SerializeField] private CommandProcessor playerProcessor;
     [SerializeField] private CommandProcessor enemyProcessor;
-    [SerializeField] private HealthController enemyHealth;
+    [SerializeField] private HealthBehaviour enemyHealth;
 
     private IState levelSetupState;
     private IState playerTurnState;
